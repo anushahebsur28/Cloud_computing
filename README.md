@@ -27,18 +27,17 @@ The benchmark results are compared using:
 
 ---
 
-## 1. Project Objective
+## 1. Project Objectives
 
-The objective of this experiment is to compare the CPU performance of Type-1 and Type-2 hypervisors using identical Ubuntu virtual machines.
+The primary objectives of this Cloud Computing laboratory experiment are:
 
-The experiment involves:
-
-1. Creating an Ubuntu virtual machine on Proxmox VE.
-2. Creating an Ubuntu virtual machine on VMware Workstation.
-3. Configuring both virtual machines with identical resources.
-4. Installing Sysbench.
-5. Running the same CPU benchmark on both virtual machines.
-6. Recording and comparing the benchmark results.
+1. **Deployment**: Provision two identical Ubuntu Virtual Machines across different hypervisor architectures:
+   - **Type-1 (Bare-Metal)**: Proxmox VE (Kernel-based Virtual Machine / KVM)
+   - **Type-2 (Hosted)**: VMware Workstation Pro on a Windows Host OS
+2. **Standardization**: Enforce uniform hardware resource allocations (2 vCPU, 2048 MB RAM, 20 GB Virtual Storage) to ensure direct comparability.
+3. **Benchmarking**: Execute the `sysbench` CPU computational benchmark using 20,000 prime numbers to stress test CPU virtualization efficiency.
+4. **Metric Collection**: Capture execution time, total events processed, throughput (events/sec), and latency statistics (min, avg, max, 95th percentile).
+5. **Architectural Evaluation**: Quantify the performance overhead introduced by host operating system abstraction layers in Type-2 hypervisors versus bare-metal hypervisor execution.
 
 ---
 
