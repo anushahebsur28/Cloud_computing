@@ -21,6 +21,9 @@ The benchmark results are compared using:
 - Average Latency
 
 ---
+### Key Finding
+
+> **Proxmox VE (Type-1 Hypervisor) achieved 1,716.69 Events/sec compared to VMware Workstation's 1,364.78 Events/sec — demonstrating a +25.79% throughput advantage and a 20.55% reduction in average latency.**
 
 ---
 
