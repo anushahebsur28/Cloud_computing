@@ -22,19 +22,6 @@ The benchmark results are compared using:
 
 ---
 
-## Table of Contents
-
-1. [Project Objective](#1-project-objective)
-2. [Requirements](#2-requirements)
-3. [Hypervisor Comparison](#3-hypervisor-comparison)
-4. [Virtual Machine Configuration](#4-virtual-machine-configuration)
-5. [Experimental Procedure](#5-experimental-procedure)
-6. [Proxmox VE](#6-proxmox-ve)
-7. [VMware Workstation](#7-vmware-workstation)
-8. [Performance Comparison](#8-performance-comparison)
-9. [Results](#9-results)
-10. [Conclusion](#10-conclusion)
-
 ---
 
 ## 1. Project Objective
