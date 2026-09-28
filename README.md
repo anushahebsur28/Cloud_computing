@@ -66,20 +66,76 @@ The experiment involves:
 - Git installed
 
 ---
+## 2. Hypervisor Architectural Comparison
 
-## 3. Hypervisor Comparison
+### Type-1 Hypervisor — Proxmox VE (Bare-Metal Architecture)
 
-### Type-1 Hypervisor — Proxmox VE
+Proxmox VE runs directly on the bare-metal physical host hardware. The Linux kernel integrated with KVM (Kernel-based Virtual Machine) acts as the hypervisor. Guest operating system instructions execute directly on hardware CPU VT-x/AMD-V extensions without passing through an intermediate desktop operating system.
 
-Proxmox VE is used as the Type-1 hypervisor in this experiment.
+```mermaid
+graph TD
+    subgraph Physical_Hardware["Physical Hardware (CPU, Memory, Storage, NIC)"]
+    end
+    
+    subgraph Type1_Layer["Proxmox VE Hypervisor (Bare-Metal OS & KVM Kernel)"]
+    end
+    
+    subgraph Guest_VM1["Ubuntu 24.04 Virtual Machine (CC-Experiment1-type1)"]
+        Sysbench1["Sysbench CPU Benchmark"]
+    end
+    
+    Physical_Hardware --> Type1_Layer
+    Type1_Layer --> Guest_VM1
+```
 
-```text
-+------------------------------------------------------+
-|             Ubuntu Virtual Machine                   |
-|             Sysbench CPU Benchmark                  |
-+------------------------------------------------------+
-|                 Proxmox VE                          |
-|              Type-1 Hypervisor                      |
-+------------------------------------------------------+
-|              Physical Server Hardware               |
+```
++-------------------------------------------------------------------+
+|               Ubuntu Virtual Machine (Type-1 Guest)               |
++-------------------------------------------------------------------+
+|               Proxmox VE Hypervisor (Linux Kernel / KVM)          |
++-------------------------------------------------------------------+
+|                 Physical Server Hardware (Bare Metal)             |
++-------------------------------------------------------------------+
+```
+
+---
+
+### Type-2 Hypervisor — VMware Workstation (Hosted Architecture)
+
+VMware Workstation runs as an application process on top of a host operating system (Windows 11/10). CPU requests from the guest VM must navigate through the VMware VMM engine, translate through host OS system calls, and be scheduled by the Windows NT kernel scheduler before reaching physical hardware.
+
+```mermaid
+graph TD
+    subgraph Physical_Hardware2["Physical Hardware (CPU, Memory, Storage, NIC)"]
+    end
+
+    subgraph Host_OS["Host Operating System (Windows 11 / Windows NT Kernel)"]
+    end
+    
+    subgraph Type2_Layer["VMware Workstation (Type-2 Hypervisor Application)"]
+    end
+    
+    subgraph Guest_VM2["Ubuntu Virtual Machine (CC-Experiment1-Type2)"]
+        Sysbench2["Sysbench CPU Benchmark"]
+    end
+    
+    Physical_Hardware2 --> Host_OS
+    Host_OS --> Type2_Layer
+    Type2_Layer --> Guest_VM2
+```
+
+```
++-------------------------------------------------------------------+
+|               Ubuntu Virtual Machine (Type-2 Guest)               |
++-------------------------------------------------------------------+
+|               VMware Workstation (Virtual Machine Monitor)        |
++-------------------------------------------------------------------+
+|               Host Operating System (Windows 11 / 10)             |
++-------------------------------------------------------------------+
+|                        Physical PC Hardware                       |
++-------------------------------------------------------------------+
+```
+
+---
+   |
 +------------------------------------------------------+
