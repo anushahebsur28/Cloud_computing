@@ -136,5 +136,15 @@ graph TD
 ```
 
 ---
-   |
+   ## 3. Virtual Machine Specifications
+
+Both virtual machines are configured with identical resources to ensure a fair performance comparison.
+
+| Parameter | Proxmox VE | VMware Workstation |
+|---|---|---|
+| Operating System | Ubuntu 22.04+ | Ubuntu 22.04+ |
+| CPU | 2 vCPU | 2 vCPU |
+| Memory | 2 GB RAM | 2 GB RAM |
+| Disk | 20 GB | 20 GB |
+| Benchmark | Sysbench | Sysbench |
 
