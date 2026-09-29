@@ -136,15 +136,16 @@ graph TD
 ```
 
 ---
-   ## 3. Virtual Machine Specifications
+  ## 3. Virtual Machine Specifications
 
-Both virtual machines are configured with identical resources to ensure a fair performance comparison.
-
-| Parameter | Proxmox VE | VMware Workstation |
-|---|---|---|
-| Operating System | Ubuntu 22.04+ | Ubuntu 22.04+ |
-| CPU | 2 vCPU | 2 vCPU |
-| Memory | 2 GB RAM | 2 GB RAM |
-| Disk | 20 GB | 20 GB |
-| Benchmark | Sysbench | Sysbench |
-
+| **Resource Parameter** | **Proxmox VE (Type-1)** | **VMware Workstation (Type-2)** | **Status** |
+|---|---|---|---|
+| **Virtual Machine Name** | `CC-Experiment1-Proxmox` | `CC-Experiment1-VMware` | Standardized |
+| **VM Identifier** | `Proxmox-VM-01` | `VMware-VM-01` | Standardized |
+| **Guest Operating System** | Ubuntu 22.04+ | Ubuntu 22.04+ | Identical |
+| **CPU Allocation** | 2 vCPU | 2 vCPU | Identical |
+| **CPU Type / Model** | Virtual CPU | Virtual CPU | Standardized |
+| **RAM Allocation** | 2 GB (2048 MB) | 2 GB (2048 MB) | Identical |
+| **Virtual Disk Capacity** | 20 GB | 20 GB | Identical |
+| **Virtual Network Adapter** | Virtual Network Adapter | VMware Virtual Network Adapter | Standardized |
+| **Benchmark Tool** | `Sysbench` | `Sysbench` | Identical |
