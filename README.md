@@ -149,3 +149,55 @@ graph TD
 | **Virtual Disk Capacity** | 20 GB | 20 GB | Identical |
 | **Virtual Network Adapter** | Virtual Network Adapter | VMware Virtual Network Adapter | Standardized |
 | **Benchmark Tool** | `Sysbench` | `Sysbench` | Identical |
+## 4. Experimental Procedure
+
+### Step 1: Virtual Machine Creation & Setup
+
+1. **Proxmox VE (Type-1)**:
+   - Navigated to `https://10.11.0.252:8006` via browser.
+   - Initialized `Create VM` wizard (VM ID: `123`, Name: `CC-Experiment1-type1`).
+   - Attached Ubuntu 24.04 ISO, assigned 2 Cores, 2048 MiB RAM, 20 GB VirtIO disk, and `vmbr0` network bridge.
+   - Completed standard Ubuntu server/desktop installation.
+
+2. **VMware Workstation (Type-2)**:
+   - Launched VMware Workstation application on Windows host.
+   - Selected `Typical Configuration` wizard.
+   - Mounted Ubuntu ISO, set name to `CC-Experiment1-Type2`.
+   - Specified 20 GB virtual disk, configured 1 Processor with 2 Cores (2 vCPU total), 2 GB RAM, and NAT adapter.
+   - Completed standard Ubuntu installation.
+
+### Step 2: System Configuration Verification
+
+On both guest OS terminals, system specs were verified prior to testing:
+
+```bash
+# 1. Verify Hostname & System Architecture
+hostnamectl
+
+# 2. Verify CPU Topology & Core Allocation
+lscpu
+
+# 3. Verify Memory Allocation
+free -h
+
+# 4. Verify Disk Partition Allocation
+df -h
+
+# 5. Monitor Real-time Process & System Load
+top
+```
+
+### Step 3: Sysbench Benchmark Installation & Execution
+
+```bash
+# Package Index Update & Sysbench Installation
+sudo apt update && sudo apt install sysbench -y
+
+# Verify Version
+sysbench --version
+
+# Execute CPU Benchmark (Prime Calculation up to 20,000)
+sysbench cpu --cpu-max-prime=20000 run
+```
+
+---
