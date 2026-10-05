@@ -201,3 +201,93 @@ sysbench cpu --cpu-max-prime=20000 run
 ```
 
 ---
+## 5. Empirical Results & Screenshots
+
+### Type-1 Hypervisor Screenshot (Proxmox VE)
+
+Below is the verified screenshot [`images/1.png`](file:///D:/Sem_5/CC/images/1.png.png) captured directly from the Proxmox VE noVNC web console:
+
+![Proxmox VE Type-1 Sysbench Result](images/1.png)
+
+*Figure 1: Proxmox VE (Type-1 Hypervisor) Sysbench Benchmark Console Output.*
+
+---
+
+### Type-2 Hypervisor Screenshot (VMware Workstation)
+
+Below is the verified screenshot [`images/2.png`](file:///D:/Sem_5/CC/images/2.png.png) captured directly from VMware Workstation:
+
+![VMware Workstation Type-2 Sysbench Result](images/2.png)
+
+*Figure 2: VMware Workstation (Type-2 Hypervisor) Sysbench Benchmark Terminal Output.*
+
+---
+
+## 6. Performance Comparison Table
+
+The following table summarizes the exact values recorded from the experimental benchmark runs:
+
+| Performance Metric | Proxmox VE (Type-1) | VMware Workstation (Type-2) | Performance Delta | Winner / Advantage |
+| :--- | :---: | :---: | :---: | :---: |
+| **Hypervisor Type** | Bare-Metal | Hosted | Architectural | Type-1 Direct Control |
+| **Guest OS** | Ubuntu | Ubuntu | Matched | Identical Baseline |
+| **vCPU Allocation** | 2 vCPU | 2 vCPU | Matched | Identical Compute |
+| **RAM Allocation** | 2 GB | 2 GB | Matched | Identical Memory |
+| **Disk Capacity** | 20 GB | 20 GB | Matched | Identical Storage |
+| **Benchmark Limit** | 20,000 Primes | 20,000 Primes | Matched | Identical Stress Test |
+| **Total Execution Time** | **10.0004 s** | **10.0007 s** | ~0.003% difference | Fixed 10s Window |
+| **Total Events Processed** | **17,169** | **13,650** | **+3,519 events (+25.78%)** | **Proxmox VE (Type-1)** |
+| **Events per Second (EPS)** | **1,716.69** | **1,364.78** | **+351.91 eps (+25.78%)** | **Proxmox VE (Type-1)** |
+| **Minimum Latency** | **0.57 ms** | **0.67 ms** | **-0.10 ms (-14.93%)** | **Proxmox VE (Faster)** |
+| **Average Latency** | **0.58 ms** | **0.73 ms** | **-0.15 ms (-20.55%)** | **Proxmox VE (Lower)** |
+| **95th Percentile Latency**| **0.65 ms** | **0.89 ms** | **-0.24 ms (-26.97%)** | **Proxmox VE (More Consistent)**|
+| **Maximum Latency** | **2.78 ms** | **4.06 ms** | **-1.28 ms (-31.53%)** | **Proxmox VE (Fewer Spikes)** |
+
+---
+
+## 7. Metric Explanations & Visualizations
+
+### Performance Metric Definitions
+
+1. **Total Execution Time (seconds)**: The wall-clock duration taken to execute the Sysbench workload. Standardized to ~10 seconds.
+2. **Events per Second (Throughput / EPS)**: The number of prime number calculation iterations completed per second. **Higher is better.**
+3. **Total Events**: Total number of prime verification cycles executed during the test duration. **Higher is better.**
+4. **Latency (milliseconds)**: Time elapsed per event execution:
+   - **Minimum Latency**: The fastest event execution time.
+   - **Average Latency**: Arithmetic mean of all event processing times.
+   - **95th Percentile Latency**: The latency threshold below which 95% of all events fell. Critical for evaluating response consistency.
+   - **Maximum Latency**: The worst-case event delay, highlighting thread scheduling latency spikes.
+
+---
+
+### Chart 1: CPU Throughput Comparison (Events / Sec)
+
+![CPU Throughput Comparison](images/events_per_second_comparison.png)
+
+*Figure 3: CPU Throughput comparison showing Proxmox VE (+25.79% faster).*
+
+---
+
+### Chart 2: CPU Latency Metrics Comparison
+
+![Latency Comparison](images/latency_comparison.png)
+
+*Figure 4: Latency comparison (Min, Avg, 95th Percentile, Max) across both hypervisors.*
+
+---
+
+### Chart 3: Total Events Processed
+
+![Total Events Comparison](images/total_events_comparison.png)
+
+*Figure 5: Total Events completed in 10 seconds (17,169 vs 13,650).*
+
+---
+
+### Chart 4: Comprehensive Performance Dashboard
+
+![Overall Performance Dashboard](images/overall_performance_dashboard.png)
+
+*Figure 6: Multi-panel performance evaluation dashboard.*
+
+---
